@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@Styles.Render("~/Content/mojCss")
+<link href="~/Content/checkBox/dist/prettyCheckable.css" rel="stylesheet" />
+
+
+<div class="jumbotron">
+    <h1>Movie recommendation system</h1>
+    <p>Based on content comparation using LSA</p>
+</div>
+
+
+<div class="container">
+
+   <div class="row">
+       <input type="checkbox" value="yes" id="chc_horor" name="horor" data-color="green" checked />
+       <input type="checkbox" value="yes" id="chc_triler" name="horor" data-color="green" checked />
+       <input type="checkbox" value="yes" id="chc_commedy" name="horor" data-color="green" checked/>
+   </div>
+
+    <div class="row" style="padding-top:25px;">       
+        <div id="custom-search-input">
+            <div class="input-group col-md-12">
+                <input type="text" class="  search-query form-control" placeholder="Search movie" id="movies" />
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" id="pretraga">
+                        <span class=" glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
