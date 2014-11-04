@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MovieDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="ID_Filma" />
+          </Key>
+          <Property Name="ID_Filma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv_Filma" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="Opis_Filma" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Likes" Type="int" />
+          <Property Name="ID_Zanra" Type="int" Nullable="false" />
+          <Property Name="LemmaPlots" Type="nvarchar" MaxLength="1500" />
+        </EntityType>
+        <EntityType Name="Recnik">
+          <Key>
+            <PropertyRef Name="ID_Recnik" />
+          </Key>
+          <Property Name="ID_Recnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Recnik" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ID_Zanra" Type="int" Nullable="false" />
+          <Property Name="RedukovanRecnik" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TopList">
+          <Key>
+            <PropertyRef Name="ID_TopList" />
+          </Key>
+          <Property Name="ID_TopList" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Slicnost" Type="real" Nullable="false" />
+          <Property Name="ID_Filma" Type="int" Nullable="false" />
+          <Property Name="Film" Type="nvarchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zanr">
+          <Key>
+            <PropertyRef Name="ID_Zanr" />
+          </Key>
+          <Property Name="ID_Zanr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv_Zanra" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Film_Zanr">
+          <End Role="Zanr" Type="Self.Zanr" Multiplicity="1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanr">
+              <PropertyRef Name="ID_Zanr" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="ID_Zanra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recnik_Zanr">
+          <End Role="Zanr" Type="Self.Zanr" Multiplicity="1" />
+          <End Role="Recnik" Type="Self.Recnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanr">
+              <PropertyRef Name="ID_Zanr" />
+            </Principal>
+            <Dependent Role="Recnik">
+              <PropertyRef Name="ID_Zanra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopList_Film">
+          <End Role="Film" Type="Self.Film" Multiplicity="1" />
+          <End Role="TopList" Type="Self.TopList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID_Filma" />
+            </Principal>
+            <Dependent Role="TopList">
+              <PropertyRef Name="ID_Filma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieDBModelStoreContainer">
+          <EntitySet Name="Film" EntityType="Self.Film" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recnik" EntityType="Self.Recnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TopList" EntityType="Self.TopList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zanr" EntityType="Self.Zanr" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Film_Zanr" Association="Self.FK_Film_Zanr">
+            <End Role="Zanr" EntitySet="Zanr" />
+            <End Role="Film" EntitySet="Film" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recnik_Zanr" Association="Self.FK_Recnik_Zanr">
+            <End Role="Zanr" EntitySet="Zanr" />
+            <End Role="Recnik" EntitySet="Recnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopList_Film" Association="Self.FK_TopList_Film">
+            <End Role="Film" EntitySet="Film" />
+            <End Role="TopList" EntitySet="TopList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="ID_Filma" />
+          </Key>
+          <Property Name="ID_Filma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv_Filma" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opis_Filma" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Likes" Type="Int32" />
+          <Property Name="ID_Zanra" Type="Int32" Nullable="false" />
+          <Property Name="LemmaPlots" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zanr" Relationship="Self.FK_Film_Zanr" FromRole="Film" ToRole="Zanr" />
+          <NavigationProperty Name="TopLists" Relationship="Self.FK_TopList_Film" FromRole="Film" ToRole="TopList" />
+        </EntityType>
+        <EntityType Name="Recnik">
+          <Key>
+            <PropertyRef Name="ID_Recnik" />
+          </Key>
+          <Property Name="ID_Recnik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Recnik1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Zanra" Type="Int32" Nullable="false" />
+          <Property Name="RedukovanRecnik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zanr" Relationship="Self.FK_Recnik_Zanr" FromRole="Recnik" ToRole="Zanr" />
+        </EntityType>
+        <EntityType Name="TopList">
+          <Key>
+            <PropertyRef Name="ID_TopList" />
+          </Key>
+          <Property Name="ID_TopList" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Slicnost" Type="Single" Nullable="false" />
+          <Property Name="ID_Filma" Type="Int32" Nullable="false" />
+          <Property Name="Film" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Film1" Relationship="Self.FK_TopList_Film" FromRole="TopList" ToRole="Film" />
+        </EntityType>
+        <EntityType Name="Zanr">
+          <Key>
+            <PropertyRef Name="ID_Zanr" />
+          </Key>
+          <Property Name="ID_Zanr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv_Zanra" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_Film_Zanr" FromRole="Zanr" ToRole="Film" />
+          <NavigationProperty Name="Recniks" Relationship="Self.FK_Recnik_Zanr" FromRole="Zanr" ToRole="Recnik" />
+        </EntityType>
+        <Association Name="FK_Film_Zanr">
+          <End Role="Zanr" Type="Self.Zanr" Multiplicity="1" />
+          <End Role="Film" Type="Self.Film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanr">
+              <PropertyRef Name="ID_Zanr" />
+            </Principal>
+            <Dependent Role="Film">
+              <PropertyRef Name="ID_Zanra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopList_Film">
+          <End Role="Film" Type="Self.Film" Multiplicity="1" />
+          <End Role="TopList" Type="Self.TopList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Film">
+              <PropertyRef Name="ID_Filma" />
+            </Principal>
+            <Dependent Role="TopList">
+              <PropertyRef Name="ID_Filma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recnik_Zanr">
+          <End Role="Zanr" Type="Self.Zanr" Multiplicity="1" />
+          <End Role="Recnik" Type="Self.Recnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanr">
+              <PropertyRef Name="ID_Zanr" />
+            </Principal>
+            <Dependent Role="Recnik">
+              <PropertyRef Name="ID_Zanra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Films" EntityType="Self.Film" />
+          <EntitySet Name="Recniks" EntityType="Self.Recnik" />
+          <EntitySet Name="TopLists" EntityType="Self.TopList" />
+          <EntitySet Name="Zanrs" EntityType="Self.Zanr" />
+          <AssociationSet Name="FK_Film_Zanr" Association="Self.FK_Film_Zanr">
+            <End Role="Zanr" EntitySet="Zanrs" />
+            <End Role="Film" EntitySet="Films" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopList_Film" Association="Self.FK_TopList_Film">
+            <End Role="Film" EntitySet="Films" />
+            <End Role="TopList" EntitySet="TopLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recnik_Zanr" Association="Self.FK_Recnik_Zanr">
+            <End Role="Zanr" EntitySet="Zanrs" />
+            <End Role="Recnik" EntitySet="Recniks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieDBModelStoreContainer" CdmEntityContainer="MovieDBEntities">
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="MovieDBModel.Film">
+              <MappingFragment StoreEntitySet="Film">
+                <ScalarProperty Name="ID_Filma" ColumnName="ID_Filma" />
+                <ScalarProperty Name="Naziv_Filma" ColumnName="Naziv_Filma" />
+                <ScalarProperty Name="Opis_Filma" ColumnName="Opis_Filma" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="ID_Zanra" ColumnName="ID_Zanra" />
+                <ScalarProperty Name="LemmaPlots" ColumnName="LemmaPlots" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recniks">
+            <EntityTypeMapping TypeName="MovieDBModel.Recnik">
+              <MappingFragment StoreEntitySet="Recnik">
+                <ScalarProperty Name="ID_Recnik" ColumnName="ID_Recnik" />
+                <ScalarProperty Name="Recnik1" ColumnName="Recnik" />
+                <ScalarProperty Name="ID_Zanra" ColumnName="ID_Zanra" />
+                <ScalarProperty Name="RedukovanRecnik" ColumnName="RedukovanRecnik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TopLists">
+            <EntityTypeMapping TypeName="MovieDBModel.TopList">
+              <MappingFragment StoreEntitySet="TopList">
+                <ScalarProperty Name="ID_TopList" ColumnName="ID_TopList" />
+                <ScalarProperty Name="Slicnost" ColumnName="Slicnost" />
+                <ScalarProperty Name="ID_Filma" ColumnName="ID_Filma" />
+                <ScalarProperty Name="Film" ColumnName="Film" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zanrs">
+            <EntityTypeMapping TypeName="MovieDBModel.Zanr">
+              <MappingFragment StoreEntitySet="Zanr">
+                <ScalarProperty Name="ID_Zanr" ColumnName="ID_Zanr" />
+                <ScalarProperty Name="Naziv_Zanra" ColumnName="Naziv_Zanra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

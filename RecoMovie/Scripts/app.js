@@ -19,6 +19,7 @@
   
     $("#movies").autocomplete({
         minLength: 2,
+
         source: function (request, response) {
             $.ajax({
                 url: "/Home/PretragaFilmova",
@@ -42,7 +43,8 @@
             });
         },
         select: function (event, ui) {
-          //  alert(ui.item.id);
+            //  alert(ui.item.id);
+            window.location.href = "/Home/MovieDetails?i=" + ui.item.id;
         }
        
     });
