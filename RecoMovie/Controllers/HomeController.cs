@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using RecoMovie.Models;
+
 
 namespace RecoMovie.Controllers
 {
@@ -19,38 +19,52 @@ namespace RecoMovie.Controllers
         }
         public ActionResult PretragaFilmova(string query)
         {
-            List<Filmovi> listFilmovi;
-            using (var dbContext = new MovieDBEntities()) {          
-                //mora dto klasa, ovako nece da uradi projekciju na klasama koje je kreirao EF
+            using (var dbContext = new MovieDBEntities()) {       
 
-                listFilmovi = dbContext.Films.
-                                            Where(x => x.Naziv_Filma.Contains(query)).
-                                            Select(f => new Filmovi() { id = f.ID_Filma, title = f.Naziv_Filma }).
-                                            ToList();
+                var listFilmovi = dbContext.Films.
+                                Where(x => x.Naziv_Filma.Contains(query)).
+                                Select(f => new { id = f.ID_Filma, title = f.Naziv_Filma }).
+                                ToList();
 
                 listFilmovi = listFilmovi
                     .GroupBy(f => f.title)
                     .Select(g => g.First())
                     .ToList();
-             
-
-            
-            }
-
 
             return Json(new {movies=listFilmovi}, JsonRequestBehavior.AllowGet);
-
-            //return Json(new
-            //{
-            //    movies = new[]{new {title="Movei title", id=4},
-            //                                new {title="Movei title 2", id=5}}
-            //}, JsonRequestBehavior.AllowGet);
+}
+            
         }
         public ActionResult MovieDetails(int i) {
             using (var dbContext = new MovieDBEntities()) {
                 Film f = dbContext.Films.Where(x => x.ID_Filma.Equals(i)).FirstOrDefault();
                 ViewBag.film = f;
                 
+
+                var top10 = dbContext.TopLists.Where(x => x.ID_Filma.Equals(i))
+                                           .Select(p => new { ID = p.Film, sim = p.Slicnost })
+                                           .ToList();
+
+                List<Film> top10Lista = new List<Film>();
+                
+             foreach (var item in top10)
+                {
+                    int id = Convert.ToInt32(item.ID);
+                    Film f1 = dbContext.Films
+                                        .Where(x => x.ID_Filma.Equals(id))
+                                        //.Select(p => new {title = p.Naziv_Filma, likes =p.Likes, id=item.ID})
+                                        .FirstOrDefault();
+                    f1.LemmaPlots = item.sim.ToString(); //iskorisito sam ovo polje da prenesem slicnost filmova
+                    top10Lista.Add(f1);
+                  
+                    ViewBag.top10Lista = top10Lista;
+                    
+                    
+                  
+               //  top10Lista.Add((Film)f1);
+
+                }
+
                 
             }
 

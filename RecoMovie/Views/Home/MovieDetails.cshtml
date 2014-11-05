@@ -1,12 +1,28 @@
 ﻿@{
     ViewBag.Title = "MovieDetails";
 }
+@Styles.Render("~/Content/mojCss")
 
-<h2>@ViewBag.film.Naziv_Filma</h2>
 
-<div class="row">
-    <div class="col-md-10">
-        @ViewBag.film.Opis_Filma
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="text-center">@ViewBag.film.Naziv_Filma</h2>
+        </div>
+    </div>
+    <div class="row">       
+        <div class="col-md-8 text-justify">            
+            @ViewBag.film.Opis_Filma
+        </div>
+        <div class="col-md-4">
+            <ul>
+                @foreach (var item in ViewBag.top10Lista)
+                {
+                    <li><a href="/Home/MovieDetails?i= @item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
+                }
+            </ul>
+
+        </div>
     </div>
 </div>
 
