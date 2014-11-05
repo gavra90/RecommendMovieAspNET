@@ -1,20 +1,28 @@
 ﻿$(document).ready(function () {
 
     $("#btn_like").on('click', function () {
+        $.ajax({
+            url: '/Home/LikeMovie',
+            type: 'POST',
+            data: {
+                ID_Movie: $("#hdn_IDMovie").val()
+                
+            },
+            success: function (data) {
+               // alert(data.poruka);
+                $("#btn_like").removeClass("btn btn-primary");
+                $("#btn_like").addClass("btn btn-default");                
+                var a = $("#numLikes").text();                
+                a = parseInt(a) + 1;
+                $("#numLikes").text(a);
+                $("#btn_like").attr('disabled',true);
 
-      
-        $("#btn_like").removeClass(this.className);
-        $("#btn_like").addClass("btn btn-default");
-        //$("#btn_like").text("Liked");
+            },
+            error: function () {
+                alert("GRESKA");
+            }
 
-        var a = $("#numLikes").text();
-       // alert(a);
-        a = parseInt(a) + 1;
-        $("#numLikes").text(a);
-        this.disabled = true;
-        
-
-
+        }); // kraj ajax
 
     });
 
