@@ -1,10 +1,12 @@
 ﻿$(document).ready(function () {
-
+    
     $("#pretraga").on('click', function () {
-
+      
         alert($("#movies").val());
 
     });
+
+
 
     $('#chc_horor').prettyCheckable({
         label:'Horror'
@@ -49,7 +51,7 @@
        
     });
 
-
+  
 
 
 

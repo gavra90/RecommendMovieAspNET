@@ -48,8 +48,7 @@ namespace RecoMovie
 
             bundles.Add(new ScriptBundle("~/bundle/mojJS").Include(
                 "~/Scripts/bootstrap.min.js",
-                "~/Content/checkBox/dist/prettyCheckable.min.js",
-                "~/Scripts/app.js"));
+                "~/Content/checkBox/dist/prettyCheckable.min.js"));
 
             BundleTable.EnableOptimizations = true;
         }

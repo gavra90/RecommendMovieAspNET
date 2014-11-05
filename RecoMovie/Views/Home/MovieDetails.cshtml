@@ -3,25 +3,34 @@
 }
 @Styles.Render("~/Content/mojCss")
 
-
+<script src="~/Scripts/app2.js"></script>
+<input type="hidden" id="hdn_IDMovie" value="@ViewBag.hdn" />
 <div class="container">
     <div class="row">
         <div class="col-md-8">
             <h2 class="text-center">@ViewBag.film.Naziv_Filma</h2>
         </div>
+        <div class="col-md-4">
+            <h2 class="text-left">&nbsp; &nbsp;Recommended</h2>
+        </div>
     </div>
     <div class="row">       
         <div class="col-md-8 text-justify">            
             @ViewBag.film.Opis_Filma
+            <br />
+            <br />
+            <button class="btn btn-primary" type="button" id="btn_like">
+                Like <span class="badge" id="numLikes">4</span>
+            </button>
+            
         </div>
         <div class="col-md-4">
             <ul>
                 @foreach (var item in ViewBag.top10Lista)
                 {
-                    <li><a href="/Home/MovieDetails?i= @item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
+                    <li><a href="/Home/MovieDetails?i=@item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
                 }
             </ul>
-
         </div>
     </div>
 </div>

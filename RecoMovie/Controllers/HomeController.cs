@@ -58,7 +58,7 @@ namespace RecoMovie.Controllers
                     top10Lista.Add(f1);
                   
                     ViewBag.top10Lista = top10Lista;
-                    
+                   
                     
                   
                //  top10Lista.Add((Film)f1);
@@ -67,7 +67,7 @@ namespace RecoMovie.Controllers
 
                 
             }
-
+            ViewBag.hdn = i;
             return View();
         }
 
