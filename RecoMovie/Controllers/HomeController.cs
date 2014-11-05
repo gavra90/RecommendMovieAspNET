@@ -33,7 +33,7 @@ namespace RecoMovie.Controllers
                     .ToList();
 
             return Json(new {movies=listFilmovi}, JsonRequestBehavior.AllowGet);
-}
+            }
             
         }
         public ActionResult MovieDetails(int i) {
@@ -57,10 +57,13 @@ namespace RecoMovie.Controllers
                     top10Lista.Add(f1);
                   
                     ViewBag.top10Lista = top10Lista;
+                   
 
-                }                
+                }
+               ViewBag.zanr = f.ID_Zanra;
             }
             ViewBag.hdn = i;
+           
             return View();
         }
         public ActionResult LikeMovie(int ID_Movie)
@@ -78,6 +81,19 @@ namespace RecoMovie.Controllers
             }
 
             return Json(new { poruka = "ok" });
+        }
+        public ActionResult GetMovies(int ID_Zanra)
+        {
+            var dbContext = new MovieDBEntities();
+            var listaFilmova = dbContext.Films
+                .Where(p => p.ID_Zanra.Equals(ID_Zanra))
+                .OrderByDescending(z => z.Likes)
+                .Select(x => new {id= x.ID_Filma, title = x.Naziv_Filma, likes = x.Likes == null ? 0 : x.Likes})
+               // .Take(10)
+                .ToList();
+            
+                return Json(new { lista = listaFilmova },JsonRequestBehavior.AllowGet);
+            
         }
     }
 }
