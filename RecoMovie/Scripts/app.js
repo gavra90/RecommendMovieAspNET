@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
     
-    $("#pretraga").on('click', function () {
+    //$("#pretraga").on('click', function () {
       
-        alert($("#movies").val());
+    //    alert($("#movies").val());
 
-    });
+    //});
 
 
 
@@ -50,9 +50,14 @@
         }
        
     });
-
-  
-
-
-
 });//end doc ready
+
+$(document).ajaxStart(function () {
+   
+    $("#anim").addClass("glyphicon-refresh-animate");
+});
+
+$(document).ajaxStop(function () {
+
+    $("#anim").removeClass("glyphicon-refresh-animate");
+});

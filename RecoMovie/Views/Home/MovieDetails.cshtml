@@ -26,23 +26,20 @@
             <a href="/Home/Index" class="btn btn-default">
                 <span class="glyphicon glyphicon-hand-left"></span> Back to search
             </a>
-            @*<button class="btn btn-primary" type="button">
-                    Back to search
-                </button>*@
-
-
             <button class="btn btn-primary" type="button" id="btn_like">
                 Like <span class="badge" id="numLikes">@ViewBag.likes</span>
             </button>
 
         </div>
         <div class="col-md-4">
+            @if (@ViewBag.top10Lista != null) { 
             <ul>
                 @foreach (var item in ViewBag.top10Lista)
                 {
                     <li><a href="/Home/MovieDetails?i=@item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
                 }
             </ul>
+            }
         </div>
     </div>
     <br>
@@ -51,16 +48,16 @@
         <div class="col-md-12">
             <div class="list-group">
                 <a id="list_horror" style="cursor:pointer" class="list-group-item">
-                    <h5 class="list-group-item-heading">Horror</h5>
-                    <p class="list-group-item-text">Best horror movies</p>
+                    <h5 class="list-group-item-heading">Drama</h5>
+                    <p class="list-group-item-text">Best drama movies</p>
                 </a>
                 <a id="list_triler" style="cursor:pointer" class="list-group-item">
-                    <h5 class="list-group-item-heading">Trailer</h5>
-                    <p class="list-group-item-text">Best horror movies</p>
+                    <h5 class="list-group-item-heading">Thriller </h5>
+                    <p class="list-group-item-text">Best thriller  movies</p>
                 </a>
                 <a id="list_commedy" style="cursor:pointer" class="list-group-item">
                     <h5 class="list-group-item-heading">Commedy</h5>
-                    <p class="list-group-item-text">Best horror movies</p>
+                    <p class="list-group-item-text">Best commedy movies</p>
                 </a>
             </div>
         </div>

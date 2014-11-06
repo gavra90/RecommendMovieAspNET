@@ -65,7 +65,7 @@
                     //$('#modal_body').append($('<div>', {
                     //    text: element.title
                     //}));
-                    html += '<a href=/Home/MovieDetails?i=' + element.id + '>' +element.title+ '</a><br>';
+                    html += "<span class=\"badge\" id=\"numLikes\">" + element.likes + '</span>  <a href=/Home/MovieDetails?i=' + element.id + '>' + element.title + '</a><br>';
 
                 });
                 html += "</div>";
@@ -105,7 +105,7 @@
                     //$('#modal_body').append($('<div>', {
                     //    text: element.title
                     //}));
-                    html += "[" + element.likes + ']  <a href=/Home/MovieDetails?i=' + element.id + '>' + element.title + '</a><br>';
+                    html += "<span class=\"badge\" id=\"numLikes\">" + element.likes + '</span>  <a href=/Home/MovieDetails?i=' + element.id + '>' + element.title + '</a><br>';
 
                 });
                 html += "</div>";
@@ -141,7 +141,7 @@
                     //$('#modal_body').append($('<div>', {
                     //    text: element.title
                     //}));
-                    html += '<a href=/Home/MovieDetails?i=' + element.id + '>' + element.title + '</a><br>';
+                    html += "<span class=\"badge\" id=\"numLikes\">" + element.likes + '</span>  <a href=/Home/MovieDetails?i=' + element.id + '>' + element.title + '</a><br>';
 
                 });
                 html += "</div>";
