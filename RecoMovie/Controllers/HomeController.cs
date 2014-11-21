@@ -42,7 +42,7 @@ namespace RecoMovie.Controllers
                 ViewBag.likes = f.Likes==null ? 0 : f.Likes;
                 ViewBag.film = f;
                 var top10 = dbContext.TopLists.Where(x => x.ID_Filma.Equals(i))
-                                           .Select(p => new { ID = p.Film, sim = p.Slicnost })
+                                           .Select(p => new { ID = p.Film, sim =Math.Round(p.Slicnost,2) })
                                            .ToList();
                 List<Film> top10Lista = new List<Film>();
                 

@@ -14,6 +14,7 @@
         </div>
         <div class="col-md-4">
             <h2 class="text-left">&nbsp; &nbsp;Recommended</h2>
+            <h4>&nbsp; &nbsp;&nbsp;&nbsp;[measures of similarity]</h4>
         </div>
     </div>
     <div class="row">
@@ -32,18 +33,19 @@
 
         </div>
         <div class="col-md-4">
-            @if (@ViewBag.top10Lista != null) { 
-            <ul>
-                @foreach (var item in ViewBag.top10Lista)
-                {
-                    <li><a href="/Home/MovieDetails?i=@item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
-                }
-            </ul>
+            @if (@ViewBag.top10Lista != null)
+            {
+                <ul>
+                    @foreach (var item in ViewBag.top10Lista)
+                    {
+                        <li><a href="/Home/MovieDetails?i=@item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
+                    }
+                </ul>
             }
         </div>
     </div>
     <br>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="list-group">
@@ -72,14 +74,12 @@
                 <h4 class="modal-title">Movie list sorted by number of likes</h4>
             </div>
             <div class="modal-body" id="modal_body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                
+
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-
