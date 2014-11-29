@@ -11,42 +11,38 @@
     <div class="row">
         <div class="col-md-8">
             <h2 class="text-center">@ViewBag.film.Naziv_Filma</h2>
+            <div class="text-justify"> @ViewBag.film.Opis_Filma</div>
+            
         </div>
         <div class="col-md-4">
             <h2 class="text-left">&nbsp; &nbsp;Recommended</h2>
             <h4>&nbsp; &nbsp;&nbsp;&nbsp;[measures of similarity]</h4>
+            @if (@ViewBag.top10Lista != null)
+            {
+                <ul>
+                    @foreach (var item in ViewBag.top10Lista)
+                    {
+                        <li><a href="/Home/MovieDetails?i=@item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
+
+                    }
+                </ul>
+            }
         </div>
     </div>
+
     <div class="row">
-
-        <div class="col-md-8 text-justify">
-            @ViewBag.film.Opis_Filma           
+        <div class="col-md-8 text-justify">                  
             <br />
             <br />
-
             <a href="/Home/Index" class="btn btn-default">
                 <span class="glyphicon glyphicon-hand-left"></span> Back to search
             </a>
             <button class="btn btn-primary" type="button" id="btn_like">
                 Like <span class="badge" id="numLikes">@ViewBag.likes</span>
             </button>
-
-        </div>
-        <div class="col-md-4">            
-            @if (@ViewBag.top10Lista != null)
-            {                
-                <ul>
-                    @foreach (var item in ViewBag.top10Lista)
-                    {
-                        <li><a href="/Home/MovieDetails?i=@item.ID_Filma"> @item.Naziv_Filma [@item.LemmaPlots]</a></li>
-                        
-                    }
-                </ul>
-            }
-        </div>
+        </div> 
     </div>
     <br>
-
     <div class="row">
         <div class="col-md-12">
             <div class="list-group">
