@@ -100,13 +100,14 @@
                 ID_Zanra: 3
             },
             success: function (data) {
+                //var i = 0;
                 var html = "<div>";
                 $.each(data.lista, function (index, element) {
                     //$('#modal_body').append($('<div>', {
                     //    text: element.title
                     //}));
-                    html += "<span class=\"badge\" id=\"numLikes\">" + element.likes + '</span>  <a href=/Home/MovieDetails?i=' + element.id + '>' + element.title + '</a><br>';
-
+                    html += "<span class=\"badge\" id=\"numLikes\">"+ element.likes + '</span>  <a href=/Home/MovieDetails?i=' + element.id + '>' + element.title + '</a><br>';
+                   // i++;
                 });
                 html += "</div>";
                 //  alert(html);

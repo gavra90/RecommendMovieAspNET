@@ -43,6 +43,7 @@ namespace RecoMovie.Controllers
                 ViewBag.film = f;
                 var top10 = dbContext.TopLists.Where(x => x.ID_Filma.Equals(i))
                                            .Select(p => new { ID = p.Film, sim =Math.Round(p.Slicnost,2) })
+                                           .Take(10)
                                            .ToList();
                 List<Film> top10Lista = new List<Film>();
                 
@@ -70,14 +71,22 @@ namespace RecoMovie.Controllers
         {
             using(var dbContext=new MovieDBEntities()){
                 Film f = dbContext.Films.Where(x => x.ID_Filma.Equals(ID_Movie)).SingleOrDefault();
-
+               
                 if (f.Likes != null)
                     f.Likes++;
                 else
                     f.Likes = 1;
-
-              
-                dbContext.SaveChanges();
+                try
+                {
+                   // dbContext.Entry(f).State = System.Data.EntityState.Modified;
+                    dbContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    
+                    throw ex;
+                }
+               
             }
 
             return Json(new { poruka = "ok" });

@@ -29,5 +29,6 @@ namespace RecoMovie
         public DbSet<Recnik> Recniks { get; set; }
         public DbSet<TopList> TopLists { get; set; }
         public DbSet<Zanr> Zanrs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

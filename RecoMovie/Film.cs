@@ -25,6 +25,7 @@ namespace RecoMovie
         public Nullable<int> Likes { get; set; }
         public int ID_Zanra { get; set; }
         public string LemmaPlots { get; set; }
+        public string LemaPlotsFrq { get; set; }
     
         public virtual Zanr Zanr { get; set; }
         public virtual ICollection<TopList> TopLists { get; set; }

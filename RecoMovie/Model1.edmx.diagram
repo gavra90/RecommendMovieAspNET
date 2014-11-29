@@ -12,6 +12,7 @@
         <AssociationConnector Association="MovieDBModel.FK_Film_Zanr" ManuallyRouted="false" />
         <AssociationConnector Association="MovieDBModel.FK_TopList_Film" ManuallyRouted="false" />
         <AssociationConnector Association="MovieDBModel.FK_Recnik_Zanr" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MovieDBModel.sysdiagram" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
